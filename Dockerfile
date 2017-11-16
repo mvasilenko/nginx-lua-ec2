@@ -8,4 +8,4 @@ WORKDIR /opt/nginx
 COPY --from=0 /opt/nginx/ .
 RUN apt-get update && apt-get -yq install liblua5.1-0
 CMD ["/opt/nginx/sbin/nginx"]
-
+USER jenkins
