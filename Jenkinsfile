@@ -35,6 +35,10 @@ node {
           app.push("${env.BUILD_NUMBER}")
           app.push("latest")
         }
+
+/* This doesn't work when running on docker-in-docker config, possibly related to
+   https://issues.jenkins-ci.org/browse/JENKINS-38018 */
+
         docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
             sh 'cp /var/jenkins_home/.dockercfg ~/.dockercfg'
             sh 'cat ~/.dockercfg'
