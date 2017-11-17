@@ -1,0 +1,7 @@
+#!/bin/sh
+REPO_URL="https://github.com/mvasilenko/nginx-lua-ec2.git"
+cat >.git/hooks/post-receive <<EOF
+#!/usr/bin/env bash
+curl "http://localhost:8080/git/notifyCommit?url=${REPO_URL}&branches=master"
+EOF
+chmod 755 .git/hooks/post-receive
