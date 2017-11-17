@@ -47,8 +47,10 @@ node {
           docker-machine create -d amazonec2 --amazonec2-open-port 80 --amazonec2-instance-type \"t2.micro\" aws-test
           eval $(docker-machine env aws-test --shell=bash) 
           containerId=\$(docker ps -aqf \"name=$IMAGE\")
+          docker pull $DOCKER_IMAGE:latest
           docker stop ${containerId}
           docker rm ${containerId} 
+          set -e
           docker run -d --name $IMAGE -p 80:80 $DOCKER_IMAGE 
          '''
    }
